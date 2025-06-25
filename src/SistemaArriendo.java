@@ -140,45 +140,45 @@ class Gestor {
 }
 
 // ---------------- MAIN ----------------
-public class SistemaArriendopatrones {
+public class SistemaArriendo {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Gestor gestor = Gestor.getInstancia();
+        try (Scanner sc = new Scanner(System.in)) {
+            Gestor gestor = Gestor.getInstancia();
 
-        gestor.cargarAutos();
+            gestor.cargarAutos();
 
-        System.out.print("Ingrese su nombre: ");
-        String nombre = sc.nextLine();
-        System.out.print("Ingrese su RUT: ");
-        String rut = sc.nextLine();
-        Cliente cliente = new Cliente(1, nombre, rut);
+            System.out.print("Ingrese su nombre: ");
+            String nombre = sc.nextLine();
+            System.out.print("Ingrese su RUT: ");
+            String rut = sc.nextLine();
+            Cliente cliente = new Cliente(1, nombre, rut);
 
-        boolean seguir = true;
-        while (seguir) {
-            System.out.println("\n--- MENÚ ---");
-            System.out.println("1. Ver autos disponibles");
-            System.out.println("2. Reservar auto");
-            System.out.println("3. Salir");
-            System.out.print("Seleccione una opción: ");
-            int op = sc.nextInt();
+            boolean seguir = true;
+            while (seguir) {
+                System.out.println("\n--- MENÚ ---");
+                System.out.println("1. Ver autos disponibles");
+                System.out.println("2. Reservar auto");
+                System.out.println("3. Salir");
+                System.out.print("Seleccione una opción: ");
+                int op = sc.nextInt();
 
-            switch (op) {
-                case 1 -> gestor.mostrarAutosDisponibles();
-                case 2 -> {
-                    gestor.mostrarAutosDisponibles();
-                    System.out.print("Ingrese ID del auto a reservar: ");
-                    int id = sc.nextInt();
-                    System.out.print("Ingrese número de días: ");
-                    int dias = sc.nextInt();
-                    System.out.print("¿Aplicar descuento por semana? (true/false): ");
-                    boolean desc = sc.nextBoolean();
-                    gestor.crearReserva(cliente, id, dias, desc);
+                switch (op) {
+                    case 1 -> gestor.mostrarAutosDisponibles();
+                    case 2 -> {
+                        gestor.mostrarAutosDisponibles();
+                        System.out.print("Ingrese ID del auto a reservar: ");
+                        int id = sc.nextInt();
+                        System.out.print("Ingrese número de días: ");
+                        int dias = sc.nextInt();
+                        System.out.print("¿Aplicar descuento por semana? (true/false): ");
+                        boolean desc = sc.nextBoolean();
+                        gestor.crearReserva(cliente, id, dias, desc);
+                    }
+                    case 3 -> seguir = false;
+                    default -> System.out.println("Opción inválida.");
                 }
-                case 3 -> seguir = false;
-                default -> System.out.println("Opción inválida.");
             }
         }
-
         System.out.println("Gracias por usar el sistema. ¡Adiós!");
     }
 }
